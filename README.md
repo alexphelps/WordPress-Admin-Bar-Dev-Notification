@@ -1,4 +1,6 @@
-WordPress-Admin-Bar-Dev-Notification
+WP Admin Bar Dev Notification
 ====================================
 
-WordPress Admin Bar Development Notification so Developers don't get confused with development and production.
+#### Ever confused between Development and Production?
+
+This plugin adds a simple noticiation on the WP Admin bar to help the developer know if they are looking at development or production environments without needing to check host files and so on. 
