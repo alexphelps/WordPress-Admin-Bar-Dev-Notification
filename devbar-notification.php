@@ -13,16 +13,17 @@ Author Email: alex@alexphelps.me
 
 function dev_admin_bar_overrides() {
   if ( is_admin_bar_showing() ) {
-    // I actually used wp_register_script() elsewhere and just ran `wp_enqueue_script( 'admin-bar-overrides' )`
-    // here, but this will also do the trick
-    wp_enqueue_style( 'admin-bar-overrides', plugins_url('styles/dev-admin-bar.css', __FILE__), array( 'admin-bar' ), null, 'all' );
+    add_action('wp_head', 'add_dev_btn_css_style');
+        function add_dev_btn_css_style() {
+        $devbtnstyle = "<style type="text/css">#wpadminbar .dev-mode-notification {background-color:rgba(255, 0, 0, 0.99) !important;}</style>";
+        echo $devbtn;
+    }
   }
 }
 
 //create our button
 
 function add_items($admin_bar) {
-
     $admin_bar->add_menu( array(
         'id'    => 'dev-mode',
                 'parent' => 'top-secondary',
@@ -35,7 +36,9 @@ function add_items($admin_bar) {
     ) );
 }
 
-//add our style and add our button with wp hooks
+//if constant is defined, add our style and add our button with wp hooks
 
-add_action( 'init', 'dev_admin_bar_overrides' );
-add_action('admin_bar_menu', 'add_items');
+if ( defined( 'DEVBAR_NOTIFY' ) && DEVBAR_NOTIFY ) {
+    add_action( 'init', 'dev_admin_bar_overrides' );
+    add_action('admin_bar_menu', 'add_items');
+}
