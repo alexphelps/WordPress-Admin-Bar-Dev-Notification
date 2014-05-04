@@ -9,14 +9,24 @@ Author Email: alex@alexphelps.me
   
 */
 
+//if constant is defined, add our style and add our button with wp hooks
+
+if ( defined( 'DEVBAR_NOTIFY' ) && DEVBAR_NOTIFY ) {
+    add_action( 'init', 'dev_admin_bar_overrides' );
+    add_action('admin_bar_menu', 'add_items');
+}
+
+
 // add css style for the button
 
 function dev_admin_bar_overrides() {
   if ( is_admin_bar_showing() ) {
-    add_action('wp_head', 'add_dev_btn_css_style');
+        add_action('wp_head', 'add_dev_btn_css_style');
+        add_action('admin_head', 'add_dev_btn_css_style');
+        //print styles
         function add_dev_btn_css_style() {
-        $devbtnstyle = "<style type="text/css">#wpadminbar .dev-mode-notification {background-color:rgba(255, 0, 0, 0.99) !important;}</style>";
-        echo $devbtn;
+        $devbtnstyle = "<style>#wpadminbar .dev-mode-notification {background-color:rgba(255, 0, 0, 0.99) !important;}</style>";
+        echo $devbtnstyle;
     }
   }
 }
@@ -34,11 +44,4 @@ function add_items($admin_bar) {
         'class' => 'dev-mode-notification'    
         ),
     ) );
-}
-
-//if constant is defined, add our style and add our button with wp hooks
-
-if ( defined( 'DEVBAR_NOTIFY' ) && DEVBAR_NOTIFY ) {
-    add_action( 'init', 'dev_admin_bar_overrides' );
-    add_action('admin_bar_menu', 'add_items');
 }
