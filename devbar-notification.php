@@ -45,3 +45,10 @@ function add_items($admin_bar) {
         ),
     ) );
 }
+
+//add notification on login screen
+function dev_notify_login_message() {
+    $message = "<p class='message' id='login_error'>Development Environtment</p>";
+    echo $message;
+    
+}
