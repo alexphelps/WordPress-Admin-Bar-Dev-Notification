@@ -14,6 +14,7 @@ Author Email: alex@alexphelps.me
 if ( defined( 'DEVBAR_NOTIFY' ) && DEVBAR_NOTIFY ) {
     add_action( 'init', 'dev_admin_bar_overrides' );
     add_action('admin_bar_menu', 'add_items');
+    add_filter( 'login_message', 'dev_notify_login_message' );
 }
 
 
